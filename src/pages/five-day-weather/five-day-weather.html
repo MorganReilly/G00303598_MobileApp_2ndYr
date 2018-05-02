@@ -1,0 +1,51 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>
+        {{title}} for {{name}}, {{country}}
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-item>
+    Lat: {{latIn}}
+    <br>
+    Lon: {{lngIn}}
+  </ion-item>
+
+  <ion-item>
+
+  </ion-item>
+
+  <ion-list>
+      <ion-item *ngFor = "let x of list">
+        {{x.dt_txt}}
+        <br>
+        Temperature --> {{x.main.temp}} °C 
+        <br>
+        Minimum Temperature --> {{x.main.temp_min}} °C
+        <br>
+        Maximum Temperature --> {{x.main.temp_max}} °C
+        <br>
+        Pressure --> {{x.main.pressure}} hPa
+        <br>
+        Humidity --> {{x.main.humidity}} %
+        <br>
+        Cloudiness --> {{x.cloud}} %
+      </ion-item>   
+      <ion-item>
+        
+      </ion-item>
+      <ion-item>
+        Wind Speed --> {{windSpeed}} mps
+      </ion-item>
+      <ion-item>
+        3H Rain --> {{rain}} mm
+      </ion-item>
+  </ion-list>
+
+</ion-content>

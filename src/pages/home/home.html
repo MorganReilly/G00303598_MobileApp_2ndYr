@@ -1,14 +1,57 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+        {{title}} for {{location.city}}, {{location.country}}
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-list>
+    <ion-item *ngFor = "let x of weather">{{x.main}}, {{x.description}}    
+    </ion-item>   
+  </ion-list>
+
+  <ion-list>
+    <ion-item>
+      Temperature --> {{main.temp}} °C
+    </ion-item>
+    <ion-item>
+        Wind Speed --> {{wind.speed}} mps
+    </ion-item>
+    <ion-item>
+        Cloudiness --> {{clouds.all }} %
+    </ion-item>
+    <ion-item>
+        Minimum Temperature --> {{main.temp_min}} °C
+    </ion-item>
+    <ion-item>
+        Maximum Temperature --> {{main.temp_max}} °C
+    </ion-item>
+    <ion-item>
+      Pressure --> {{main.pressure}} hPa
+    </ion-item>
+    <ion-item>
+        Humidity --> {{main.humidity}} %
+    </ion-item>  
+    <ion-item>
+      <button ion-button (click)="open5Day()">5 Day Forecast</button>
+    </ion-item>  
+    
+  </ion-list>
+
+  <form (ngSubmit) = "updateCity()">
+    <ion-item>
+      <ion-label>City: </ion-label>
+      <ion-input [(ngModel)]="inputCity" name="city" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Country: </ion-label>
+      <ion-input [(ngModel)]="inputCountry" name="country" type="text"></ion-input>
+    </ion-item>
+
+    <button ion-button>Submit</button>
+  </form>
+   
 </ion-content>
