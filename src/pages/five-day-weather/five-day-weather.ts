@@ -23,24 +23,19 @@ export class FiveDayWeatherPage {
   list: any[] = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, private dataProvider: Data5HourProvider, private platform: Platform, public geolocation: Geolocation) {
-    platform.ready().then(() => {
+    this.platform.ready().then(() => {
 
+      var options = {
+        timeout: 5000
+      };
       // get current position
-      geolocation.getCurrentPosition().then(pos => {
+      geolocation.getCurrentPosition(options).then(pos => {
         console.log('lat: ' + pos.coords.latitude + ', lon: ' + pos.coords.longitude);
         this.latIn = pos.coords.latitude;
         this.lngIn = pos.coords.longitude;
+      }).catch(()=> {
+        console.log("Error retrieving location");
       });
-
-      const watch = geolocation.watchPosition().subscribe(pos => {
-        console.log('lat: ' + pos.coords.latitude + ', lon: ' + pos.coords.longitude);
-        this.latIn = pos.coords.latitude;
-        this.lngIn = pos.coords.longitude;
-      });
-
-      // to stop watching
-      watch.unsubscribe();
-
     });
   }
 
@@ -49,9 +44,13 @@ export class FiveDayWeatherPage {
   }
   ionViewWillEnter() {
 
+    var options = {
+      timeout: 5000
+    };
+
     this.platform.ready().then(() => {
 
-      this.geolocation.getCurrentPosition().then(pos => {
+      this.geolocation.getCurrentPosition(options).then(pos => {
         this.latIn = pos.coords.latitude;
         this.lngIn = pos.coords.longitude;
 
@@ -68,8 +67,9 @@ export class FiveDayWeatherPage {
           console.log(pos);
         });
 
-      }).catch(err => console.log("Error retrieving location", err));
-
+      }).catch(()=> {
+        console.log("Error retrieving location");
+      });
     });
   }
 }
