@@ -43,6 +43,9 @@ export class HomePage {
   clouds = {
     all: null
   }; 
+  rain = {
+    threeH: null,
+  }
 
   //Constructor
   constructor(public navCtrl: NavController, public http: HttpClient, private dataProvider: DataProvider, public storage: Storage) {
@@ -79,7 +82,6 @@ export class HomePage {
           city: "Galway",
           country: "Ireland"
         }
-
         console.log(this.location.city + "" + this.location.country);
       }  
       
@@ -105,6 +107,7 @@ export class HomePage {
         city: this.inputCity,
         country: this.inputCountry
     }
+    
     this.storage.set('location', JSON.stringify(location));
 
     this.dataProvider.GetWeatherData(location.city,location.country).subscribe(data =>

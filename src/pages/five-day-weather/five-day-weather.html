@@ -1,8 +1,8 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>
-        {{title}} for {{name}}, {{country}}
+    <ion-title class="Title">
+      <h1>{{title}} for {{name}}, {{country}}</h1>
     </ion-title>
   </ion-navbar>
 
@@ -10,42 +10,24 @@
 
 
 <ion-content padding>
-
-  <ion-item>
+  <ion-item class="latLon">
     Lat: {{latIn}}
     <br>
-    Lon: {{lngIn}}
+    Lon: {{lngIn}}  
   </ion-item>
-
-  <ion-item>
-
-  </ion-item>
-
+  <br>
   <ion-list>
-      <ion-item *ngFor = "let x of list">
-        {{x.dt_txt}}
-        <br>
-        Temperature --> {{x.main.temp}} °C 
-        <br>
-        Minimum Temperature --> {{x.main.temp_min}} °C
-        <br>
-        Maximum Temperature --> {{x.main.temp_max}} °C
-        <br>
-        Pressure --> {{x.main.pressure}} hPa
-        <br>
-        Humidity --> {{x.main.humidity}} %
-        <br>
-        Cloudiness --> {{x.cloud}} %
-      </ion-item>   
-      <ion-item>
-        
-      </ion-item>
-      <ion-item>
-        Wind Speed --> {{windSpeed}} mps
-      </ion-item>
-      <ion-item>
-        3H Rain --> {{rain}} mm
-      </ion-item>
+    <ion-item *ngFor="let x of list">
+      <h1>{{x.dt_txt}}</h1>
+      Temperature --> {{x.main.temp}} °C
+      <br> Wind Speed --> {{x.wind.speed}} mps
+      <br> Cloudiness --> {{x.clouds.all}} %
+      <br> Minimum Temperature --> {{x.main.temp_min}} °C
+      <br> Maximum Temperature --> {{x.main.temp_max}} °C
+      <br> Pressure --> {{x.main.pressure}} hPa
+      <br> Humidity --> {{x.main.humidity}} %
+    </ion-item>
+    <br>
   </ion-list>
 
 </ion-content>

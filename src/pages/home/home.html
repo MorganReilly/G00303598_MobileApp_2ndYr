@@ -1,57 +1,75 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-        {{title}} for {{location.city}}, {{location.country}}
+    <ion-title class="Title">
+      <h1>{{title}} for {{location.city}}, {{location.country}}</h1>
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor = "let x of weather">{{x.main}}, {{x.description}}    
-    </ion-item>   
+    <ion-item *ngFor="let x of weather" class="weatherDes">
+      <img width="100" src="http://openweathermap.org/img/w/{{x.icon}}.png">
+      <br>
+      {{x.main}}, {{x.description}}
+    </ion-item>
   </ion-list>
 
   <ion-list>
     <ion-item>
-      Temperature --> {{main.temp}} °C
+      <ion-col>Temperature --></ion-col>
+      <ion-col>{{main.temp}} °C</ion-col>
     </ion-item>
     <ion-item>
-        Wind Speed --> {{wind.speed}} mps
+      <ion-col>Wind Speed --></ion-col>
+      <ion-col>{{wind.speed}} mps</ion-col>
     </ion-item>
     <ion-item>
-        Cloudiness --> {{clouds.all }} %
+      <ion-col>Cloudiness --></ion-col>
+      <ion-col>{{clouds.all }} %</ion-col>
     </ion-item>
     <ion-item>
-        Minimum Temperature --> {{main.temp_min}} °C
+      <ion-col>Min Temperature --></ion-col>
+      <ion-col>{{main.temp_min}} °C</ion-col>
     </ion-item>
     <ion-item>
-        Maximum Temperature --> {{main.temp_max}} °C
+      <ion-col>Max Temperature --></ion-col>
+      <ion-col>{{main.temp_max}} °C</ion-col>
     </ion-item>
     <ion-item>
-      Pressure --> {{main.pressure}} hPa
+      <ion-col>Pressure --></ion-col>
+      <ion-col>{{main.pressure}} hPa</ion-col>
     </ion-item>
     <ion-item>
-        Humidity --> {{main.humidity}} %
-    </ion-item>  
-    <ion-item>
-      <button ion-button (click)="open5Day()">5 Day Forecast</button>
-    </ion-item>  
-    
+      <ion-col>Humidity --></ion-col>
+      <ion-col>{{main.humidity}} %</ion-col>
+    </ion-item>
   </ion-list>
+  <br>
 
-  <form (ngSubmit) = "updateCity()">
+  <ion-item>
+    <h1>View 5 Day Forcast</h1>
+    <button ion-button (click)="open5Day()" id="buttonColor">5 Day Forecast</button>
+    <p>*Uses geolocation</p>
+    <p>*Shows 5day / 3Hour Forcast</p>
+  </ion-item>
+
+  <br>
+  <ion-item>
+    <h1>Input City</h1>
+  </ion-item>
+  <form (ngSubmit)="updateCity()">
     <ion-item>
-      <ion-label>City: </ion-label>
+      <ion-label class="labels">City: </ion-label>
       <ion-input [(ngModel)]="inputCity" name="city" type="text"></ion-input>
     </ion-item>
-
     <ion-item>
-      <ion-label>Country: </ion-label>
+      <ion-label class="labels">Country: </ion-label>
       <ion-input [(ngModel)]="inputCountry" name="country" type="text"></ion-input>
     </ion-item>
-
-    <button ion-button>Submit</button>
+    <ion-item>
+      <button ion-button id="buttonColor" >Update City!</button>
+    </ion-item>
   </form>
-   
+
 </ion-content>

@@ -15,32 +15,24 @@ export class FiveDayWeatherPage {
   //Variables for reading latitude and longitude
   latIn: any;
   lngIn: any;
-  title: string = "5 Day Forcast for ";
+  title: string = "5 Day / 3 Hour Forcast";
 
   //Variables for json data
   name: any;
   country: any;
-  list: [{
-    weather: any[],
-    cloud: any,
-    windSpeed: any,
-    rain: any
-  }];
-  
+  list: any[] = [];
 
-
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, private dataProvider: Data5HourProvider,private platform: Platform, public geolocation: Geolocation) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, private dataProvider: Data5HourProvider, private platform: Platform, public geolocation: Geolocation) {
   }
 
-  ionViewDidLoad(){
-    this.geolocation.getCurrentPosition().then( pos => {
+  ionViewDidLoad() {
+    this.geolocation.getCurrentPosition().then(pos => {
       this.latIn = pos.coords.latitude;
       this.lngIn = pos.coords.longitude;
 
       console.log("Lat: " + this.latIn + " Lon: " + this.lngIn);
 
-      this.dataProvider.GetFiveHourData(this.latIn, this.lngIn).subscribe(data =>{
+      this.dataProvider.GetFiveHourData(this.latIn, this.lngIn).subscribe(data => {
         this.list = data.list;
 
         this.name = data.city.name;
@@ -48,7 +40,8 @@ export class FiveDayWeatherPage {
 
         console.log("Lat: " + this.latIn + " Lon: " + this.lngIn);
         console.log(this.name + "," + this.country);
+        console.log(this.list);
       });
-    }).catch( err => console.log(err));    
+    }).catch(err => console.log(err));
   }
 }
