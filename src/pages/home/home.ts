@@ -124,7 +124,8 @@ export class HomePage {
 
         this.clouds.all = data.clouds.all;
       });
-    console.log(location);    
+    console.log(location);
+       
   }
 
   open5Day(){

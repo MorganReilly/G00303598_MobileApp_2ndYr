@@ -23,25 +23,53 @@ export class FiveDayWeatherPage {
   list: any[] = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, private dataProvider: Data5HourProvider, private platform: Platform, public geolocation: Geolocation) {
+    platform.ready().then(() => {
+
+      // get current position
+      geolocation.getCurrentPosition().then(pos => {
+        console.log('lat: ' + pos.coords.latitude + ', lon: ' + pos.coords.longitude);
+        this.latIn = pos.coords.latitude;
+        this.lngIn = pos.coords.longitude;
+      });
+
+      const watch = geolocation.watchPosition().subscribe(pos => {
+        console.log('lat: ' + pos.coords.latitude + ', lon: ' + pos.coords.longitude);
+        this.latIn = pos.coords.latitude;
+        this.lngIn = pos.coords.longitude;
+      });
+
+      // to stop watching
+      watch.unsubscribe();
+
+    });
   }
 
   ionViewDidLoad() {
-    this.geolocation.getCurrentPosition().then(pos => {
-      this.latIn = pos.coords.latitude;
-      this.lngIn = pos.coords.longitude;
+    console.log("Alive");
+  }
+  ionViewWillEnter() {
 
-      console.log("Lat: " + this.latIn + " Lon: " + this.lngIn);
+    this.platform.ready().then(() => {
 
-      this.dataProvider.GetFiveHourData(this.latIn, this.lngIn).subscribe(data => {
-        this.list = data.list;
-
-        this.name = data.city.name;
-        this.country = data.city.country;
+      this.geolocation.getCurrentPosition().then(pos => {
+        this.latIn = pos.coords.latitude;
+        this.lngIn = pos.coords.longitude;
 
         console.log("Lat: " + this.latIn + " Lon: " + this.lngIn);
-        console.log(this.name + "," + this.country);
-        console.log(this.list);
-      });
-    }).catch(err => console.log(err));
+
+        this.dataProvider.GetFiveHourData(this.latIn, this.lngIn).subscribe(data => {
+          this.list = data.list;
+
+          this.name = data.city.name;
+          this.country = data.city.country;
+
+          console.log("Lat: " + this.latIn + " Lon: " + this.lngIn);
+          console.log(this.name + "," + this.country);
+          console.log(pos);
+        });
+
+      }).catch(err => console.log("Error retrieving location", err));
+
+    });
   }
 }

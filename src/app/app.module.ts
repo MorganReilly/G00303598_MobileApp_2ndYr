@@ -18,7 +18,6 @@ import { Data5HourProvider } from '../providers/data5-hour/data5-hour';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Platform } from 'ionic-angular';
 
-
 @NgModule({
   declarations: [
     MyApp,

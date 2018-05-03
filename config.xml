@@ -84,4 +84,6 @@
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1">
         <variable name="GEOLOCAION_USAGE_DESCRIPTION" value="To locate you" />
     </plugin>
+    <plugin name="org.apache.cordova.geolocation" spec="^0.3.6" />
+    <plugin name="cordova-plugin-android-permissions" spec="^1.0.0" />
 </widget>
