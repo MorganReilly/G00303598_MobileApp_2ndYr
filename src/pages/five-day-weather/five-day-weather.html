@@ -26,7 +26,6 @@
     </ion-item>
   </form>
 
-
   <ion-list>
     <ion-item *ngFor="let x of list">
       <h1>{{x.dt_txt}}</h1>
@@ -42,3 +41,9 @@
   </ion-list>
 
 </ion-content>
+<ion-footer>
+  <ion-item>
+    <button ion-button (click)="randomLocation()"  id="buttonColor">Random Coords</button>
+  </ion-item>
+
+</ion-footer>

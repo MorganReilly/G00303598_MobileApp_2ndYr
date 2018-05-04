@@ -58,16 +58,7 @@ export class FiveDayWeatherPage {
         console.log("Error retrieving location");
 
       });
-
-      //Android doesn't seem to want to connect
-      //Location is for Guigang, Chin
-      this.latIn = 23.050976;
-      this.lngIn = 109.862683;
-
-      console.log("Lat: " + this.latIn + " Lon: " + this.lngIn);
-      console.log(this.name + "," + this.country);
-
-      this.getData();
+      this.getRandomCoords();
     });
   }
 
@@ -81,9 +72,32 @@ export class FiveDayWeatherPage {
       console.log("Lat: " + this.latIn + " Lon: " + this.lngIn);
       console.log(this.name + "," + this.country);
     });
-  }
+  };
 
-  updateLocation(){
+  updateLocation() {
     this.getData();
-  }
+  };
+
+  randomLocation(){
+    this.getRandomCoords();
+  };
+
+  getRandomCoords() {
+    //Android doesn't seem to want to connect
+    //Location is for Guigang, Chin
+
+    this.latIn = this.generateRandomNumber(-90.00000, 90.00000);
+    this.lngIn = this.generateRandomNumber(-180.00000, 180.00000);
+
+    this.getData();
+
+    console.log("Lat: " + this.latIn + " Lon: " + this.lngIn);
+    console.log(this.name + "," + this.country);
+  };
+
+  generateRandomNumber(min: number, max: number) {
+    let rand = Math.random() * (max - min) + min;
+    console.log(rand);
+    return rand;
+  };
 }

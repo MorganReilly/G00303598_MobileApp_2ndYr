@@ -45,7 +45,6 @@
       <ion-col>{{main.humidity}} %</ion-col>
     </ion-item>
   </ion-list>
-
   <ion-item>
     <h1>Input City</h1>
   </ion-item>
@@ -63,14 +62,11 @@
       <button ion-button id="buttonColor">Update City!</button>
     </ion-item>
   </form>
-
-</ion-content>
-
-<ion-footer>
+  <ion-item></ion-item>
   <ion-item>
     <h1>View 5 Day Forecast </h1>
     <button ion-button (click)="open5Day()" id="buttonColor">5 Day Forecast</button>
     <p>*Uses geolocation</p>
     <p>*Shows 5day / 3Hour Forecast </p>
   </ion-item>
-</ion-footer>
+</ion-content>
