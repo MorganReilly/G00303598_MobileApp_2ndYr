@@ -2,7 +2,8 @@
 
   <ion-navbar>
     <ion-title class="Title">
-      {{title}} for {{name}}, {{country}}
+      <h1>{{title}}</h1>
+      <h1>{{name}}, {{country}}</h1>
     </ion-title>
   </ion-navbar>
 
@@ -10,12 +11,22 @@
 
 
 <ion-content padding>
-  <ion-item class="latLon">
-    Lat: {{latIn}}
-    <br>
-    Lon: {{lngIn}}  
-  </ion-item>
-  <br>
+
+  <form (ngSubmit)="updateLocation()">
+    <ion-item>
+      <ion-label>Lat:</ion-label>
+      <ion-input [(ngModel)]="latIn" name="latIn" #ctrl="ngModel" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Lon:</ion-label>
+      <ion-input [(ngModel)]="lngIn" name="lngIn" #ctrl="ngModel" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <button ion-button id="buttonColor">Update Location!</button>
+    </ion-item>
+  </form>
+
+
   <ion-list>
     <ion-item *ngFor="let x of list">
       <h1>{{x.dt_txt}}</h1>

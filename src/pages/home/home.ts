@@ -99,6 +99,7 @@ export class HomePage {
   
           this.clouds.all = data.clouds.all;
         });
+        
     });       
   }
   

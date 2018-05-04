@@ -21,55 +21,69 @@ export class FiveDayWeatherPage {
   name: any;
   country: any;
   list: any[] = [];
+  weather: any[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, private dataProvider: Data5HourProvider, private platform: Platform, public geolocation: Geolocation) {
-    this.platform.ready().then(() => {
 
-      var options = {
-        timeout: 5000
-      };
-      // get current position
-      geolocation.getCurrentPosition(options).then(pos => {
-        console.log('lat: ' + pos.coords.latitude + ', lon: ' + pos.coords.longitude);
-        this.latIn = pos.coords.latitude;
-        this.lngIn = pos.coords.longitude;
-      }).catch(()=> {
-        console.log("Error retrieving location");
-      });
-    });
   }
 
   ionViewDidLoad() {
     console.log("Alive");
+    console.log("ionViewDidLoad");
   }
-  ionViewWillEnter() {
 
+  ionViewWillEnter() {
+    console.log("ionViewWillEnter");
     var options = {
       timeout: 5000
     };
 
     this.platform.ready().then(() => {
 
+      console.log("platform.ready");
+
       this.geolocation.getCurrentPosition(options).then(pos => {
+
+        //Setting latitude and longitude parameters
         this.latIn = pos.coords.latitude;
         this.lngIn = pos.coords.longitude;
 
+        //Output to console for debugging
         console.log("Lat: " + this.latIn + " Lon: " + this.lngIn);
+        console.log(this.name + "," + this.country);
 
-        this.dataProvider.GetFiveHourData(this.latIn, this.lngIn).subscribe(data => {
-          this.list = data.list;
+        this.getData();
 
-          this.name = data.city.name;
-          this.country = data.city.country;
-
-          console.log("Lat: " + this.latIn + " Lon: " + this.lngIn);
-          console.log(this.name + "," + this.country);
-          console.log(pos);
-        });
-
-      }).catch(()=> {
+      }).catch(() => {
         console.log("Error retrieving location");
+
       });
+
+      //Android doesn't seem to want to connect
+      //Location is for Guigang, Chin
+      this.latIn = 23.050976;
+      this.lngIn = 109.862683;
+
+      console.log("Lat: " + this.latIn + " Lon: " + this.lngIn);
+      console.log(this.name + "," + this.country);
+
+      this.getData();
     });
+  }
+
+  getData() {
+    this.dataProvider.GetFiveHourData(this.latIn, this.lngIn).subscribe(data => {
+      this.list = data.list;
+
+      this.name = data.city.name;
+      this.country = data.city.country;
+
+      console.log("Lat: " + this.latIn + " Lon: " + this.lngIn);
+      console.log(this.name + "," + this.country);
+    });
+  }
+
+  updateLocation(){
+    this.getData();
   }
 }
