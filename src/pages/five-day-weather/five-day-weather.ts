@@ -35,7 +35,7 @@ export class FiveDayWeatherPage {
   ionViewWillEnter() {
     console.log("ionViewWillEnter");
     var options = {
-      timeout: 5000
+      timeout: 1000
     };
 
     this.platform.ready().then(() => {
@@ -52,12 +52,14 @@ export class FiveDayWeatherPage {
         console.log("Lat: " + this.latIn + " Lon: " + this.lngIn);
         console.log(this.name + "," + this.country);
 
+        //Retrieve data
         this.getData();
 
       }).catch(() => {
         console.log("Error retrieving location");
-
       });
+
+      //If the location retrieval fails random coords are set instead
       this.getRandomCoords();
     });
   }
@@ -83,9 +85,8 @@ export class FiveDayWeatherPage {
   };
 
   getRandomCoords() {
-    //Android doesn't seem to want to connect
-    //Location is for Guigang, Chin
-
+    //Location issues on Android
+    //Setting location to random coords instead to overcome issue
     this.latIn = this.generateRandomNumber(-90.00000, 90.00000);
     this.lngIn = this.generateRandomNumber(-180.00000, 180.00000);
 
